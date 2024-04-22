@@ -1,0 +1,15 @@
+.register-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .register{
+        display: flex;
+        gap: 15px;
+        flex-direction: column;
+
+        h1{
+            text-align: center;
+        }
+    }
+}

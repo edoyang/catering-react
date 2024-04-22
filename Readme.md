@@ -1,0 +1,1 @@
+npm i express bcryptjs body-parser cloudinary cors dotenv jsonwebtoken mongoose multer multer-storage-cloudinary nodemon

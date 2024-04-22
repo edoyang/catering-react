@@ -1,0 +1,15 @@
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login{
+        display: flex;
+        gap: 15px;
+        flex-direction: column;
+
+        h1{
+            text-align: center;
+        }
+    }
+}
