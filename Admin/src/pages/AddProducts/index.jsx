@@ -58,15 +58,11 @@ const AddProducts = () => {
     if (product.image) {
       formData.append('image', product.image);
     }
-
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
   
     try {
       const response = await fetch('http://localhost:5000/products', {
         method: 'POST',
-        body: formData  // No Content-Type header needed, browser will set it with proper boundary
+        body: formData
       });
       if (response.ok) {
         alert('Product added successfully!');
@@ -89,16 +85,11 @@ const AddProducts = () => {
   };  
 
   const handleFileChange = (e) => {
-    console.log(e.target.files); 
     setProduct(prevProduct => ({
       ...prevProduct,
       image: e.target.files[0] 
     }));
   };
-
-  useEffect(() => {
-    console.log(product.image);
-  }, [product.image]);
   
 
   return (

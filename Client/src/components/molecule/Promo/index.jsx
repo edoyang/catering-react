@@ -1,14 +1,22 @@
+import React from 'react';
 import './style.scss';
 
-const Promo = ({ recentPost }) => {
+const Promo = ({ users }) => {
   return (
     <div className="promotional">
       <h1>RECENT POSTS</h1>
       <div className="promo">
-        {recentPost.slice(0, 3).map((post) => (
-          <div className='promo-item' key={post.id}>
-            <h3 className='promo-title'>{post.title}</h3>
-            <p>{post.body}</p>
+        {users.slice(0, 3).map((user, index) => (
+          <div className='promo-item' key={index}>
+            <h3 className='promo-title'>{user.name}</h3>
+            <div className="detail">
+              <p>{user.review}</p>
+            </div>
+            <div className="pickup">
+              {user.pickup.map((pick, idx) => (
+                <p key={idx}>{pick}</p>
+              ))}
+            </div>
           </div>
         ))}
       </div>

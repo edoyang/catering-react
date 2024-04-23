@@ -21,10 +21,9 @@ const uploadImageToCloudinary = async (file) => {
           throw new Error("No file provided");
       }
 
-      // Since the file is already uploaded to Cloudinary and we have the URL and publicId, return them:
       return {
-          url: file.path, // URL of the uploaded image on Cloudinary
-          publicId: file.filename // Cloudinary public ID for the image
+          url: file.path,
+          publicId: file.filename
       };
   } catch (error) {
       console.error("Failed to process image data:", error);
@@ -86,20 +85,17 @@ async function deleteProduct(req, res) {
   const productId = req.params.id;
 
   try {
-      // Directly delete the product using findByIdAndDelete
       const product = await Product.findByIdAndDelete(productId);
       if (!product) {
           return res.status(404).json({ message: 'Product not found' });
       }
 
-      // After confirming the product is found and deleted, proceed to delete the image from Cloudinary
       const cloudinaryResponse = await cloudinary.uploader.destroy(product.publicId);
       if (cloudinaryResponse.result !== 'ok') {
           console.log('Cloudinary deletion response:', cloudinaryResponse);
           return res.status(500).json({ message: 'Failed to delete image from Cloudinary' });
       }
 
-      // If everything is okay, send a success response
       res.status(200).json({ message: 'Product deleted successfully' });
   } catch (error) {
       console.error('Error deleting product:', error);

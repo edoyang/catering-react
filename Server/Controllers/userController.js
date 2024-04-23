@@ -36,4 +36,21 @@ async function login(req, res) {
   }
 }
 
-module.exports = { register, login };
+
+async function getAllUsersDetails(req, res) {
+  try {
+    const users = await User.find({}, 'firstname lastname review pickup');
+    const userDetails = users.map(user => {
+      return {
+        name: `${user.firstname} ${user.lastname}`,
+        review: user.review,
+        pickup: user.pickup
+      };
+    });
+    res.json(userDetails);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+module.exports = { register, login, getAllUsersDetails };
